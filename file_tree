@@ -1,0 +1,165 @@
+#!/bin/bash
+
+GREEN="\033[0;32m"
+BLUE="\033[0;34m"
+YELLOW="\033[0;33m"
+CYAN="\033[0;36m"
+RESET="\033[0m"
+Y_OR_N=""
+Y_OR_N2=""
+PROJECT_NAME=${1:-project}
+#--------------------------------------------------------------------
+#                       write banner
+#--------------------------------------------------------------------
+clear
+echo -e "${BOLD}${CYAN}##*+-=****+===========-=------------=+++==-----===++*****####*****+=---------=======*#**+***+++*#**#"
+echo -e "${BOLD}${CYAN}++==*#*+===++++======------------+#%%%%%%%%%%%%%%%%%%%%%%@%@@%%%%#####*+==---========+*##%######****"
+echo -e "${BOLD}${CYAN}++**+==++*#*+=======---------=#%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@%%%%%%##+===========+*##%%@@@%***"
+echo -e "${BOLD}${CYAN}+#*+*###***============---+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@%###+=========*##%@@@@@%#"
+echo -e "${BOLD}${CYAN}+%@@@@%##*============*##%%%%%%%%%%%%%%#-*%%%%%##%%%%#-:#%%%%%%%%%%%@@@@@@@@@@@@%%%#+===++#%@@@@@@@%"
+echo -e "${BOLD}${CYAN}*%@@@@@@#+====++**#%%%%%%%%%%%#%%%%==%*:..:*#+-..:*#-...-#%#=..*%%%%#%%@@@@@@@@@@@@@@@%%@@@@@@@@@@@%"
+echo -e "${BOLD}${CYAN}+%@@@@@@@@@@@@@@@@@@@@%%%*=#%*=:*#::.::....:-.....:.:....=:....:*#=.:+%%%%%@@@@@@@@@@@@@@@@@@@@@@@@%"
+echo -e "${BOLD}${CYAN}**%@@@@@@@@@@@@@@@@%+#%%+-:-*+-:.:...::.....-.:...:......-......-....=+#*-+#%%=*@@@@@@@@@@@@@@@@@@%%"
+echo -e "${BOLD}${CYAN}%**%@@@@@@@@@@@@%%@*-:**=:.:+=..::...:............:......::.....-....:++:::*+::+%@#%@@@@@@@@@@@@@@%#"
+echo -e "${BOLD}${CYAN}%%*#@@@@@@@@@@%%##%+-:-+-..:=:..::....:.....:.....:....:::......:.....-=:::+-:-+***#%@@@@@@@@@@@@%##"
+echo -e "${BOLD}${CYAN}%%**%@@@@@@@@%###*+*-::+-..-=..:.-...==:...:=....-++-..::=-....:-.....--::==::-****##%@@%#@@@@@@%##%"
+echo -e "${BOLD}${CYAN}%%#+*%@@@@@@@%###*-+-:::+::++=.-*=--::-..:::......::.....=+-..-:=.:...-:::+-::=****##%%#+%@@%%@%##%%"
+echo -e "${BOLD}${CYAN}%%#++*%@@%%@@@%###+++=+++::::.:+*:....:....:......::.....-....::....:::::-:-:-***##%%%*+#@@%%%%*#%%@"
+echo -e "${BOLD}${CYAN}%%%+++#%@@%*%@%##*#+**=:=:.:...-+.....:....:.......:.....:.....:....-:.:=:::-++**####++#@@%%%%%#%%%@"
+echo -e "${BOLD}${CYAN}@%%*+**%%%%%**%@%##***=:==::....::................-............:...:-..-=:::--+**##*++*%%#%%%%@%%%@@"
+echo -e "${BOLD}${CYAN}@@%#+#**%%%%%*+#@@@%##*==+=-:..:.:..::......:.....-.....:.....:....--.:--:::-=+**#*++#%%*#%%%@@%%@@@"
+echo -e "${BOLD}${CYAN}@@@%*##*#%**#%#+*%@@@%#*#*++=:.:....:.--...:=..:.:-...........:..:=+:.:=-:::=+#%#+=+#%%*+#%#%@@%@@@@"
+echo -e "${BOLD}${CYAN}@@@%#%%#*%#=+#**==*%@@@@%%**%+:::*-.::##-.:*#-...=+....:-:...-:.:=+-..-*-::++#%*+=+#@@#++###%@@@@@@@"
+echo -e "${BOLD}${CYAN}@@@@%%%#*##+==#+++-=#%@@%%%%%%%%%%%#=%%%%#%%%#=.*%%#:.:*##:.-#*:=*#::-##-+#%#*+==+#%%%*++*#%@@@@@@@@"
+echo -e "${BOLD}${CYAN}@@@@%%%%#+#+==++===--=#%@@@@@@@@@@@@%@@%@%%%%%%%%%%%%#%%%%%#%%%%%%%%%%%%%%%*+===+##*##+++*#%@@@@@@@%"
+echo -e "${BOLD}${CYAN}@@@@@@%%%***+==++==-=--=#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%*+===++*++##*++*#%@@@@@@@@%"
+echo -e "${BOLD}${CYAN}@@@@@@@%%#***===++==-==--=#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*+===++++++*#*+*#*#%@@@@@@@%#"
+echo -e "${BOLD}${CYAN}%@@@@@@@%%*+*+===++===+=====+#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%*+===+++++++*##+*##*%@@@@@@@%##"
+echo -e "${BOLD}${CYAN}%%@@@@@@@%#***+===+*+==========+++*#%%@@@@@@@@@@@@@@@@@@@@@@@%%#*##*+=====++++++*##**%%*#@@@@@@@@%##"
+echo -e "${BOLD}${CYAN}%%%@@@@@@@%#***+===+***+=============++*###%%%%%%%##%%%#*+++=++++==========++++*****%%##%@@@@@@@%###"
+echo -e "${RESET}\n"                                          
+echo -e "${BOLD}${GREEN}                                           file_tree_script${RESET}⚡                               "
+
+sleep 2
+clear
+#--------------------------------------------------------------------
+#                       creating folders
+#--------------------------------------------------------------------
+echo -e "${CYAN}Proje dosya ağacı oluşturuluyor: ${PROJECT_NAME}${RESET}"
+sleep 0.5
+echo -e "${BLUE}Proje klasörü oluşturuluyor...${RESET}⚡ "
+mkdir -p "$PROJECT_NAME"
+sleep 0.5
+
+for arg in "${@:2}"; do
+    if [ -n "$arg" ]; then
+        echo -e "${GREEN}$arg klasörü oluşturuluyor...${RESET}⚡"
+        mkdir -p "$PROJECT_NAME/$arg"
+        sleep 0.5
+    fi
+done
+#--------------------------------------------------------------------
+#                      request for download tester
+#--------------------------------------------------------------------
+echo -e  "${CYAN}Proje için tester ister misiniz ?(y/n)${RESET}"
+echo -e  "${CYAN}3. halkadan önceki projeler için(fract-ol hariç)!${RESET}"
+read Y_OR_N
+
+case "$Y_OR_N" in
+  "y")
+    if [[ "$PROJECT_NAME" == *"printf"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/alelievr/libft-unit-test.git ${PROJECT_NAME}/Tester 2>&1 | awk '{print "\033[32m" $0 "\033[0m"}'
+    fi
+    if [[ "$PROJECT_NAME" == *"get_next_line"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/Tripouille/gnlTester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi
+    if [[ "$PROJECT_NAME" == *"libft"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/paulo-santana/ft_printf_tester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi 
+    if [[ "$PROJECT_NAME" == *"minitalk"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/ThibaudM13/minitalk-Tester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi
+    if [[ "$PROJECT_NAME" == *"pipex"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/vfurmane/pipex-tester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi
+    if [[ "$PROJECT_NAME" == *"so_long"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/augustobecker/so_long_tester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi
+    if [[ "$PROJECT_NAME" == *"fdf"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/Plaetorius/fdf_tester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi  
+    if [[ "$PROJECT_NAME" == *"Philosophers"* ]] || [[ "$PROJECT_NAME" == *"philosophers"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/MichelleJiam/LazyPhilosophersTester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi
+    if [[ "$PROJECT_NAME" == *"minishell"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/MichelleJiam/LazyPhilosophersTester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi 
+    if [[ "$PROJECT_NAME" == *"push_swap"* ]]; then
+        mkdir -p "$PROJECT_NAME/Tester"
+        git clone https://github.com/gemartin99/Push-Swap-Tester.git ${PROJECT_NAME}/Tester 2>&1 | sed "s/^/${GREEN}/"
+    fi     
+    ;;
+  "n")
+    ;;
+  *)
+    ;;
+esac
+#--------------------------------------------------------------------
+#                   request for create Makefile
+#--------------------------------------------------------------------
+sleep 0.5
+echo -e  "${CYAN}Proje için Makefile ister misiniz ?(y/n)${RESET}"
+read Y_OR_N2
+
+case "$Y_OR_N" in
+  "y")
+    echo -e "${GREEN}Makefile dosyası oluşturuluyor...${RESET}⚡ "
+    touch "$PROJECT_NAME/Makefile"   
+    ;;
+  "n")
+    ;;
+  *)
+    ;;
+esac
+sleep 0.5
+#--------------------------------------------------------------------
+#                   creating files
+#--------------------------------------------------------------------
+echo -e "${GREEN}main.c dosyası oluşturuluyor...${RESET}⚡ "
+touch "$PROJECT_NAME/main.c"
+sleep 0.5
+
+echo -e "${GREEN}TO_DO List dosyası oluşturuluyor...${RESET}⚡ "
+echo "# TO_DO List" > "$PROJECT_NAME/TO_DO List"
+sleep 0.5
+
+echo -e "${CYAN}Proje dosya ağacı başarıyla oluşturuldu!${RESET}"
+
+echo -e "${BLUE}Oluşturulan dosya ve klasörler:${RESET}"
+#--------------------------------------------------------------------
+#               show file tree of the created project
+#--------------------------------------------------------------------
+print_tree() {
+    local indent="$1"
+    local dir="$2"
+
+    for item in "$dir"/*; do
+        if [ -d "$item" ]; then
+            echo -e "${CYAN}${indent}├── $(basename "$item")"
+            print_tree "$indent│   " "$item"
+        elif [ -f "$item" ]; then
+            echo -e "${CYAN}${indent}└── $(basename "$item")"
+        fi
+    done
+}
+echo -e "${GREEN}$PROJECT_NAME"
+print_tree " " "$PROJECT_NAME"
